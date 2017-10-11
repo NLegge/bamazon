@@ -95,7 +95,7 @@ function idPrompt() {
 //prompt user for the quantity they wish to buy. Pass in selected id
 function quantityPrompt(id) {
   //mysql query
-  connection.query("SELECT stock_quantity, price FROM products WHERE ?", {item_id: id}, function(err, res) {
+  connection.query("SELECT stock_quantity, price, product_sales FROM products WHERE ?", {item_id: id}, function(err, res) {
     if (err) throw err;
     //ask user for quantity
     inquirer.prompt({
@@ -112,7 +112,8 @@ function quantityPrompt(id) {
             "UPDATE products SET ? WHERE ?",
             [
               {
-                stock_quantity: newQuantity
+                stock_quantity: newQuantity,
+                product_sales: newSales
               },
               {
                 item_id: id
