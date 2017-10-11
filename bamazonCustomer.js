@@ -47,12 +47,13 @@ function printTable() {
         'middle': '│'
       },
       //Set table headers
-      head: ['item_id', 'product_name', 'department_name', 'price', 'stock_quantity']
+      head: ['item_id', 'product_name', 'department_name', 'price', 'stock_quantity', 'product_sales']
     });
     for (var i = 0; i < res.length; i++) {
       //Push mysql elements to table array 
       table.push(
-        [res[i].item_id, res[i].product_name, res[i].department_name, "$" + res[i].price, res[i].stock_quantity]
+        [res[i].item_id, res[i].product_name, res[i].department_name, 
+        "$" + res[i].price, res[i].stock_quantity, res[i].product_sales]
       );
     }
     //Print the entire table using the cli-table2 npm
@@ -77,7 +78,6 @@ function idPrompt() {
       for (var i = 0; i < res.length; i++) {
         if (answer.id == res[i].item_id) {
           //if id exists, grab id number and pass into quantity function
-          console.log("This ID exists!");
           chosenId = res[i].item_id;
           quantityPrompt(chosenId);
           //break the for loop when id is found
@@ -106,6 +106,7 @@ function quantityPrompt(id) {
       //check if quantity in stock is greater than or equal to the quantity requesed 
       if (res[0].stock_quantity >= parseInt(answer.quantity)) {
       	var newQuantity = res[0].stock_quantity - parseInt(answer.quantity);
+      	var newSales = res[0].product_sales + parseInt(answer.quantity);
       	//mysql query to update quantity
         connection.query(
             "UPDATE products SET ? WHERE ?",
@@ -120,7 +121,8 @@ function quantityPrompt(id) {
             function(error) {
               if (error) throw err;
               //if no error tell user their order has been processed and the total
-              console.log("Your Order has been processed!\nYour total is $" + (parseInt(answer.quantity) * res[0].price));
+              console.log("Your Order has been processed!\nYour total is $" + 
+              	(parseInt(answer.quantity) * res[0].price));
               //end connection to mysql
               connection.end();
             }
