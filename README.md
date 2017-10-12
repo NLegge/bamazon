@@ -10,9 +10,15 @@ Execute command line functions as one of three users:
 
 ## User Guide
 
+### Initialization
+
+There is a package.json file provided. The user will need to navigate to the directory containing the project files and execute npm install command.  
+
+![NPM Syntax](/images/npm.PNG)
+
 ### Customer
 
-Upon opening the command line, the user will call the bamazonCustomer.js file from the command line using the following syntax.
+Upon opening the command line, the user will execute the bamazonCustomer.js file using the following syntax.
 
 ![Node Syntax](/images/nodeBamazonCustomer.PNG)
 
@@ -26,9 +32,46 @@ A No answer will say "Thank you for shopping with us!" and close out the connect
 
 ![Customer Prompts](/images/fullCustPrompt.PNG)
 
-####Alternate Prompts
+#### Alternate Prompts/Messages
 
-If the user tried to purchase more 
+##### Invalid ID Message
+If the user enters an ID that does not exist, they will receive a message "This ID does not exist. Please choose another from the table above..." They will then be prompted to enter an ID again.
 
-A yes answer will reprint the table with updated values and begin the prompt process again.
+![Invalid ID](/images/.PNG)
+
+##### Invalid Quantity Message
+
+If the user tried to purchase more of an item than what is in stock, they will receive a message "Insufficient quantity in stock.Please select a smaller quantity..." They will then be prompted to enter a quantity again.
+
+![Invalid Quantity](/images/.PNG)
+
+##### Purchase Another Product Prompt
+
+A yes answer will reprint the table with updated values and begin the ID/Quantity functions again.
+
+![Invalid Quantity](/images/.PNG)
+
+### Manager
+
+Upon opening the command line, the user will execute the bamazonManager.js file using the following syntax.
+
+![Node Syntax](/images/managerSyntax.PNG)
+
+Upon executing the above code, a list of menu options will become available. Each option will run a different function.
+
+![Manager Menu](/images/managerMenu.PNG)
+
+#### View Products for Sale
+
+If the option "View Products for Sale" is selected, the entire table of available items will print to the console. The user will then be prompted "Would you like to select another action?". 
+
+If the user selects No, the session will end.
+
+![View Products](/images/viewProducts.PNG)
+
+If the user selects Yes, the console will populate the menu again. 
+
+![Another Action](/images/yes.PNG)
+
+#### View Low Inventory
 

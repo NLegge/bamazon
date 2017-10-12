@@ -27,7 +27,7 @@ var table = new Table({
     'middle': '│'
   },
   //Set table headers
-  head: ['item_id', 'product_name', 'department_name', 'price', 'stock_quantity']
+  head: ['item_id', 'product_name', 'department_name', 'price', 'stock_quantity', 'product_sales']
 });
 
 // create the connection information for the sql database
@@ -83,7 +83,7 @@ function viewProducts() {
     for (var i = 0; i < res.length; i++) {
       //Push mysql elements to table array 
       table.push(
-        [res[i].item_id, res[i].product_name, res[i].department_name, "$" + res[i].price, res[i].stock_quantity]
+        [res[i].item_id, res[i].product_name, res[i].department_name, "$" + res[i].price, res[i].stock_quantity, res[i].product_sales]
       );
     }
     //Print the entire table using the cli-table2 npm
