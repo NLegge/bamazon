@@ -14,5 +14,5 @@ Execute command line functions as one of three users:
 
 Upon opening the command line, the user will call the bamazonCustomer.js file from the command line using the following syntax.
 
-![Node Syntax](images/nodeBamazonCustomer.png)
+![Node Syntax](./images/nodeBamazonCustomer.png)
 
