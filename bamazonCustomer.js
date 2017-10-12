@@ -47,13 +47,12 @@ function printTable() {
         'middle': '│'
       },
       //Set table headers
-      head: ['item_id', 'product_name', 'department_name', 'price', 'stock_quantity', 'product_sales']
+      head: ['item_id', 'product_name', 'department_name', 'price', 'stock_quantity']
     });
     for (var i = 0; i < res.length; i++) {
       //Push mysql elements to table array 
       table.push(
-        [res[i].item_id, res[i].product_name, res[i].department_name, 
-        "$" + res[i].price, res[i].stock_quantity, res[i].product_sales]
+        [res[i].item_id, res[i].product_name, res[i].department_name, "$" + res[i].price, res[i].stock_quantity]
       );
     }
     //Print the entire table using the cli-table2 npm
@@ -106,7 +105,8 @@ function quantityPrompt(id) {
       //check if quantity in stock is greater than or equal to the quantity requesed 
       if (res[0].stock_quantity >= parseInt(answer.quantity)) {
       	var newQuantity = res[0].stock_quantity - parseInt(answer.quantity);
-      	var newSales = res[0].product_sales + parseInt(answer.quantity);
+      	var total = parseInt(answer.quantity) * res[0].price;
+      	var newSales = res[0].product_sales + total;
       	//mysql query to update quantity
         connection.query(
             "UPDATE products SET ? WHERE ?",
@@ -122,10 +122,8 @@ function quantityPrompt(id) {
             function(error) {
               if (error) throw err;
               //if no error tell user their order has been processed and the total
-              console.log("Your Order has been processed!\nYour total is $" + 
-              	(parseInt(answer.quantity) * res[0].price));
-              //end connection to mysql
-              connection.end();
+              console.log("Your Order has been processed!\nYour total is $" + total.toFixed(2));
+              another();
             }
           );
         //if quantity requested is higher than in stock, ask the user for a new quantity
@@ -137,3 +135,24 @@ function quantityPrompt(id) {
   });
 }
 
+function another() {
+  inquirer.prompt({
+      type: "list",
+      message: "Would you like to buy another product?",
+      name: "another",
+      choices: [
+        "Yes",
+        "No"
+      ]
+    }).then(function(answer) {
+      if (answer.another === "Yes") {
+      	printTable();
+      } else {
+        console.log("Thank you for shopping with us!")
+        //end connection to mysql
+        connection.end();
+      }
+    }); 
+}
+
+    

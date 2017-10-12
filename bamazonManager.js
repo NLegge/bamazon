@@ -89,8 +89,7 @@ function viewProducts() {
     //Print the entire table using the cli-table2 npm
     console.log(table.toString());
     //Select another action? yes/no
-    //end connection to mysql
-    connection.end();
+    another();
   });
 }
 
@@ -108,8 +107,7 @@ function lowInventory() {
     //Print the entire table using the cli-table2 npm
     console.log(table.toString());
     //Select another action? yes/no
-    //end connection to mysql
-    connection.end();
+    another();
   });
 }
 
@@ -145,6 +143,7 @@ function addInventory() {
         function(err, res) {
           if (err) throw err;
           //Select another action? yes/no
+          another();
         }
       )
       console.log("The quantity of " + answer.choice + " has been updated to " + answer.quantity);
@@ -200,7 +199,28 @@ function addItem() {
           if (err) throw err;
           console.log("Your item has been added successfully!");
           //Select another action? yes/no
+          another();
         }
       );
   });
+}
+
+function another() {
+  inquirer.prompt({
+      type: "list",
+      message: "Would you like to select another action?",
+      name: "another",
+      choices: [
+        "Yes",
+        "No"
+      ]
+    }).then(function(answer) {
+      if (answer.another === "Yes") {
+      	menuOptions();
+      } else {
+        console.log("Thank you!")
+        //end connection to mysql
+        connection.end();
+      }
+    }); 
 }
