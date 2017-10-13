@@ -150,10 +150,9 @@ If the user selects Yes, the console will populate the menu again.
 
 If the option "Create New Department" is selected, the user will be asked to answer the following questions:
 
-	*"What is the item you would like to add?."
-	*"What department would you like to place your item in?"
-	*"How much does the item cost?"
-	*"How many do you have in stock?"
+	*"What is the department you would like to add?"
+	*"What is the overhead cost for this department?"
+
 
 Once all questions have been answered, the user will be prompted "Your item has been added successfully!" The user will then be prompted, "Would you like to select another action?".
 
