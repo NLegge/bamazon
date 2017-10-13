@@ -154,7 +154,7 @@ If the option "Create New Department" is selected, the user will be asked to ans
 	*"What is the overhead cost for this department?"
 
 
-Once all questions have been answered, the user will be prompted "Your item has been added successfully!" The user will then be prompted, "Would you like to select another action?".
+Once all questions have been answered, the user will be prompted "Your department has been added successfully!" The user will then be prompted, "Would you like to select another action?".
 
 If the user selects No, the session will end.
 
