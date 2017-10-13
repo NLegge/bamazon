@@ -13,7 +13,7 @@ PRIMARY KEY (item_id)
 );
 -- Add product_sales to products table for Challenge #3
 ALTER TABLE products
-ADD product_sales INT (10) NOT NULL 
+ADD product_sales INT (10) NULL 
 AFTER stock_quantity; 
 -- Create department table
 CREATE TABLE departments (

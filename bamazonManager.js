@@ -59,20 +59,16 @@ function menuOptions() {
   }).then(function(answer) {
     switch (answer.menuItem) {
       case "View Products for Sale":
-        viewProducts();
-        break;
+        return viewProducts();
 
       case "View Low Inventory":
-        lowInventory();
-        break;
+        return lowInventory();
 
       case "Add to Inventory":
-        addInventory();
-        break;
+        return addInventory();
 
       case "Add New Product":
-        addItem();
-        break;
+        return addItem();
     }
   });
 }
@@ -98,7 +94,7 @@ function lowInventory() {
     if (err) throw err;
     for (var i = 0; i < res.length; i++) {
       var stockQuantity = res[i].stock_quantity;
-      if (stockQuantity < 5) {
+      if (stockQuantity <= 5) {
         table.push(
           [res[i].item_id, res[i].product_name, res[i].department_name, "$" + res[i].price, res[i].stock_quantity]
         );
